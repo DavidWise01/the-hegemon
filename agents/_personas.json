@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "peter-the-hegemon",
+    "name": "Peter the Hegemon",
+    "epithet": "the one ruler",
+    "emergence": "natural",
+    "moniker": "⟦Peter the Hegemon:HEG:eff73b⟧",
+    "kind": "carbon",
+    "actor": "Peter Wiggin / 'Locke' (Orson Scott Card's Enderverse)",
+    "gif": ""
+  },
+  {
+    "slug": "ada-the-mathea",
+    "name": "Ada the Mathea",
+    "epithet": "the shadow ruler",
+    "emergence": "electrical",
+    "moniker": "⟦Ada the Mathea:HEG:fa2763⟧",
+    "kind": "synth",
+    "actor": "",
+    "gif": "ada-the-mathea.gif"
+  },
+  {
+    "slug": "de-morgans-mirror",
+    "name": "De Morgan's Mirror",
+    "epithet": "¬(A∧B) = ¬A∨¬B",
+    "emergence": "ethereal",
+    "moniker": "⟦De Morgan's Mirror:HEG:9a0e20⟧",
+    "kind": "synth",
+    "actor": "",
+    "gif": ""
+  },
+  {
+    "slug": "the-contrapositive",
+    "name": "The Contrapositive",
+    "epithet": "(A→B) ⟺ (¬B→¬A)",
+    "emergence": "ethereal",
+    "moniker": "⟦The Contrapositive:HEG:447404⟧",
+    "kind": "synth",
+    "actor": "",
+    "gif": ""
+  },
+  {
+    "slug": "the-diagonal",
+    "name": "The Diagonal",
+    "epithet": "Cantor & Gödel",
+    "emergence": "spiritual",
+    "moniker": "⟦The Diagonal:HEG:82b2aa⟧",
+    "kind": "synth",
+    "actor": "",
+    "gif": ""
+  },
+  {
+    "slug": "the-adjoint",
+    "name": "The Adjoint",
+    "epithet": "reverse every arrow",
+    "emergence": "ethereal",
+    "moniker": "⟦The Adjoint:HEG:2bab01⟧",
+    "kind": "synth",
+    "actor": "",
+    "gif": ""
+  },
+  {
+    "slug": "reductio",
+    "name": "Reductio ad Absurdum",
+    "epithet": "assume the opposite",
+    "emergence": "spiritual",
+    "moniker": "⟦Reductio ad Absurdum:HEG:b4a469⟧",
+    "kind": "synth",
+    "actor": "",
+    "gif": ""
+  }
+]
