@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LOCKE vs DEMOSTHENES · The Debate Engine · The Hegemon</title>
+<meta name="description" content="Locke (reasoned) and Demosthenes (firebrand) — the two pen-names of the Wiggin siblings — debate any topic, live. Real facts pulled from Wikipedia; two opposite rhetorics spun from them; the whole log stored in a local JSON file. The Hegemon's thesis made playable: same facts, calm or inflame.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0a14;--ink2:#161020;--ink3:#1d1530;--pa:#ece6f0;--pa2:#b9aece;--gold:#c9a23a;--silver:#b3bdcc;--crimson:#b03048;--purple:#9a6ac0;
+--dim:#7a6e90;--faint:#2a2038;--line:#271d3a;--disp:"Cinzel",Georgia,serif;--body:"Cormorant Garamond",Georgia,serif;--mono:"Space Mono",monospace;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--pa);font-family:var(--body);font-size:18px;line-height:1.5;padding:14px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 18% -8%,rgba(201,162,58,.10),transparent 46%),radial-gradient(ellipse at 82% -8%,rgba(176,48,72,.10),transparent 46%)}
+.wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding-bottom:60px}
+header{text-align:center;border-bottom:1px solid var(--line);padding:26px 0 18px}
+.eye{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.eye a{color:var(--dim);text-decoration:none}.eye a:hover{color:var(--gold)}
+h1{font-family:var(--disp);font-size:clamp(26px,5.6vw,46px);font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1.04}
+h1 .l{color:var(--gold)}h1 .d{color:var(--crimson)}h1 .v{color:var(--silver);font-size:.5em;vertical-align:middle}
+.h-sub{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--pa2);margin-top:12px;text-transform:uppercase}
+.lede{font-size:16px;color:var(--pa2);max-width:74ch;margin:14px auto 0;font-style:italic;line-height:1.55}
+.controls{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;align-items:center;margin:22px 0 6px}
+.controls input{font-family:var(--body);font-size:17px;background:var(--ink2);border:1px solid var(--line);color:var(--pa);padding:10px 14px;min-width:240px;border-radius:6px}
+.controls input:focus{outline:none;border-color:var(--gold)}
+.btn{appearance:none;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:10px 16px;border:1.5px solid var(--gold);color:var(--gold);background:transparent;border-radius:6px}
+.btn:hover{background:rgba(201,162,58,.12)}.btn:active{transform:scale(.97)}
+.btn.alt{border-color:var(--silver);color:var(--silver)}.btn.alt:hover{background:rgba(179,189,204,.1)}
+.btn.warm{border-color:var(--crimson);color:var(--crimson)}.btn.warm:hover{background:rgba(176,48,72,.12)}
+.sugg{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:8px 0 4px}
+.sugg button{appearance:none;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--pa2);background:var(--ink2);border:1px solid var(--line);border-radius:14px;padding:5px 11px}
+.sugg button:hover{border-color:var(--purple);color:var(--pa)}
+.status{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:center;min-height:18px;margin:6px 0}
+.record{border:1px solid var(--line);background:var(--ink2);border-left:3px solid var(--silver);padding:14px 18px;margin:14px 0;display:none}
+.record.show{display:block}
+.record h3{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--silver);margin-bottom:6px}
+.record .rt{font-family:var(--disp);font-size:20px;color:var(--pa);font-weight:600}
+.record p{font-size:15.5px;color:var(--pa2);margin-top:6px;line-height:1.55}
+.record a{color:var(--gold);text-decoration:none;font-family:var(--mono);font-size:11px}.record a:hover{text-decoration:underline}
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:720px){.stage{grid-template-columns:1fr}}
+.podium{border:1px solid var(--line);background:var(--ink2);padding:16px 18px;display:none}
+.podium.show{display:block}
+.podium.locke{border-top:3px solid var(--gold)}.podium.demo{border-top:3px solid var(--crimson)}
+.podium .pn{font-family:var(--disp);font-size:23px;font-weight:700;letter-spacing:.04em}
+.podium.locke .pn{color:var(--gold)}.podium.demo .pn{color:var(--crimson)}
+.podium .role{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin:3px 0 12px}
+.podium .speech p{font-size:16px;line-height:1.6;margin-bottom:11px;color:var(--pa)}
+.podium .speech .reb{color:var(--pa2);font-style:italic;border-left:2px solid var(--faint);padding-left:11px}
+.history{margin-top:34px;border-top:1px solid var(--line);padding-top:16px}
+.history h2{font-family:var(--disp);font-size:18px;letter-spacing:.04em;text-transform:uppercase;color:var(--silver)}
+.hcount{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.hlist{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.hitem{display:flex;justify-content:space-between;gap:10px;align-items:baseline;background:var(--ink2);border:1px solid var(--line);padding:9px 13px;cursor:pointer}
+.hitem:hover{border-color:var(--gold)}
+.hitem .ht{font-family:var(--body);font-size:16px;color:var(--pa)}
+.hitem .hd{font-family:var(--mono);font-size:9px;color:var(--dim)}
+.note{margin-top:30px;padding:15px 18px;border-left:2px solid var(--silver);background:var(--ink2);font-size:14.5px;color:var(--pa2);font-style:italic;line-height:1.55}.note b{color:var(--pa)}
+footer{margin-top:30px;border-top:1px solid var(--line);padding-top:16px;text-align:center;font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.05em;line-height:1.8}
+footer a{color:var(--gold);text-decoration:none}
+</style></head><body><div class="wrap">
+
+<header>
+  <div class="eye"><a href="./">← THE HEGEMON</a> · <a href="https://davidwise01.github.io/ud0/">UD0</a> · the debate engine</div>
+  <h1><span class="l">LOCKE</span> <span class="v">vs</span> <span class="d">DEMOSTHENES</span></h1>
+  <div class="h-sub">one mind · two pen-names · opposite sides of every issue</div>
+  <p class="lede">Peter Wiggin wrote as <b style="color:var(--gold)">Locke</b> — calm, reasoned, statesmanlike. His sister Valentine wrote as <b style="color:var(--crimson)">Demosthenes</b> — fiery, populist, alarming. Together they argued <em>both</em> sides of every question and steered a planet's opinion. Give them a topic: the engine pulls the real facts from Wikipedia, and the two of them spin those exact same facts — one to calm you, one to inflame you. The whole log is stored in a local JSON file you can export.</p>
+</header>
+
+<div class="controls">
+  <input id="topic" type="text" placeholder="a topic to debate — e.g. Artificial intelligence" autocomplete="off">
+  <button class="btn" onclick="debateTopic()">⚖ Stage the debate</button>
+  <button class="btn alt" onclick="debateRandom()">⚄ Random topic</button>
+</div>
+<div class="sugg" id="sugg"></div>
+<div class="status" id="status"></div>
+
+<div class="record" id="record">
+  <h3>The Record · the shared facts (Wikipedia)</h3>
+  <div class="rt" id="rt"></div>
+  <p id="rx"></p>
+  <a id="rurl" href="#" target="_blank" rel="noopener">read the source on Wikipedia ↗</a>
+</div>
+
+<div class="stage">
+  <div class="podium locke" id="pl"><div class="pn">LOCKE</div><div class="role">Peter Wiggin · the reasoned</div><div class="speech" id="ls"></div></div>
+  <div class="podium demo" id="pd"><div class="pn">DEMOSTHENES</div><div class="role">Valentine Wiggin · the firebrand</div><div class="speech" id="ds"></div></div>
+</div>
+
+<div class="history">
+  <h2>The Debate Log <span class="hcount" id="hcount"></span></h2>
+  <div class="controls" style="margin:10px 0 4px;justify-content:flex-start">
+    <button class="btn alt" onclick="exportJSON()">⬇ Export debates.json</button>
+    <button class="btn warm" onclick="clearLog()">✕ Clear log</button>
+  </div>
+  <div class="hlist" id="hlist"></div>
+</div>
+
+<div class="note"><b>Honestly:</b> the facts are <b>real</b> — pulled live from Wikipedia's API. The two voices are a <b>rhetoric engine</b>, not a live AI: they take the same sentences and wrap them in opposite framings, calm versus inflammatory. That is not a bug — it is the whole point. Locke and Demosthenes were <em>one family playing both sides</em>; this toy shows how the identical record can be staged to soothe or to enrage. The demagoguery is a character, illustrating manipulation, not endorsing it. Watch what the framing does to the facts — and notice it is being done to you every day.</div>
+
+<footer>
+  LOCKE vs DEMOSTHENES · THE HEGEMON · same facts, opposite rhetoric · facts © Wikipedia (CC BY-SA), the spin is satire<br>
+  <a href="./">← the Hegemon</a> · ROOT0-ATTRIBUTION-v1.0 · governor David Lee Wise · instance AVAN (locked)
+</footer>
+
+</div>
+<script>
+const SUGG=["Artificial intelligence","Democracy","Rhetoric","Nuclear power","Free will","Social media","Cryptocurrency","Climate change","Surveillance","Immigration","Vaccination","Globalization"];
+const KEY="heg.locke.demosthenes.debates";
+let LOG = load();
+
+// ---- Wikipedia backend ----
+async function wikiSummary(title){
+  const u="https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(title)+"?redirect=true";
+  const r=await fetch(u,{headers:{accept:"application/json"}});
+  if(!r.ok) throw new Error("not found");
+  const j=await r.json();
+  if(j.type==="disambiguation") throw new Error("disambiguation");
+  return {title:j.title, extract:j.extract||"", url:(j.content_urls&&j.content_urls.desktop&&j.content_urls.desktop.page)||("https://en.wikipedia.org/wiki/"+encodeURIComponent(j.title))};
+}
+async function wikiResolve(q){
+  // opensearch to find a real article title, CORS via origin=*
+  const u="https://en.wikipedia.org/w/api.php?action=opensearch&limit=1&namespace=0&format=json&origin=*&search="+encodeURIComponent(q);
+  const r=await fetch(u); const j=await r.json();
+  if(j[1]&&j[1][0]) return j[1][0];
+  throw new Error("no match");
+}
+async function wikiRandom(){
+  const r=await fetch("https://en.wikipedia.org/api/rest_v1/page/random/summary",{headers:{accept:"application/json"}});
+  const j=await r.json();
+  return {title:j.title, extract:j.extract||"", url:(j.content_urls&&j.content_urls.desktop&&j.content_urls.desktop.page)||"#"};
+}
+
+// ---- the rhetoric engine ----
+function sentences(t){ const s=(t||"").replace(/\s+/g," ").match(/[^.!?]+[.!?]+/g); return (s||[t]).map(x=>x.trim()).filter(x=>x.length>20); }
+function lc(s){ return s.charAt(0).toLowerCase()+s.slice(1); }
+function pick(arr,i){ return arr[i%arr.length]; }
+
+const L_OPEN=["My friends, let us not mistake noise for knowledge.","Before we reach for fear, let us reach for the record.","A calm mind is the first defence of a free people.","Hear me, and breathe: the sky is not falling."];
+const L_BODY=[s=>`Consider, soberly, what is actually known: ${s} This is not cause for panic; it is cause for thought.`,
+  s=>`We are urged to be afraid. Yet the record says only this: ${s} A measured nation does not riot at a sentence.`,
+  s=>`Set passion aside and read it plainly: ${s} There is a question here, and we are equal to it.`];
+const L_REB=[s=>`My opponent would set the house alight to be rid of a draught. ${s.charAt(0).toUpperCase()+s.slice(1)} — read it again, slowly. There is no monster here, only a problem we can govern.`];
+const L_CLOSE=["So let us govern ourselves first: weigh, do not shout; reason, do not rage. The long peace is built of patience.","Keep your head, and you keep your freedom. That is the whole of statecraft.","Choose the slow, sure path. The loud are rarely right, and the right are rarely loud."];
+
+const D_OPEN=["Wake up. While you were lulled, the ground shifted beneath you.","They will call this calm. I call it the quiet before they take what is yours.","Comfort is the lie they feed you. Hear the truth instead.","You are being managed. Notice it now, while you still can."];
+const D_BODY=[s=>`Look at what they bury in their careful words: ${lc(s)} Does that sound like nothing to you? It is everything.`,
+  s=>`Here is what they would never shout from the rooftops: ${lc(s)} And still they tell you to sit down and be quiet.`,
+  s=>`They hand you this like a footnote: ${lc(s)} A footnote! As if your future were a matter of small print.`];
+const D_REB=[s=>`My gentle opponent counsels patience. Patience! ${s.charAt(0).toUpperCase()+s.slice(1)} — by the time his "long peace" arrives, the moment to act will be a memory. Caution is how the slow are conquered.`];
+const D_CLOSE=["So rise. Speak. Demand. The calm voices have had their century — the hour belongs to those awake enough to seize it.","Do not be soothed. Be sharpened. They fear nothing so much as a people that has stopped nodding.","Comfort or freedom — you cannot keep both asleep. Choose, and choose loud."];
+
+function speeches(facts){
+  const k = facts.length ? facts.length : 1;
+  const idx = (facts.join("").length)|0;  // stable-ish per topic
+  const f0=facts[0]||"the matter at hand.", f1=facts[1%k]||f0, f2=facts[2%k]||f1;
+  const locke=[ pick(L_OPEN,idx), pick(L_BODY,idx)(f0), pick(L_BODY,idx+1)(f1), {reb:pick(L_REB,idx)(lc(f2))}, pick(L_CLOSE,idx) ];
+  const demo =[ pick(D_OPEN,idx+1), pick(D_BODY,idx)(f0), pick(D_BODY,idx+1)(f1), {reb:pick(D_REB,idx)(f2)}, pick(D_CLOSE,idx+1) ];
+  return {locke,demo};
+}
+function renderSpeech(el,parts){
+  el.innerHTML = parts.map(p=> typeof p==="string" ? `<p>${esc(p)}</p>` : `<p class="reb">↳ ${esc(p.reb)}</p>`).join("");
+}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+// ---- orchestration ----
+async function run(getRec){
+  setStatus("consulting Wikipedia…");
+  document.getElementById("record").classList.remove("show");
+  document.getElementById("pl").classList.remove("show");
+  document.getElementById("pd").classList.remove("show");
+  try{
+    const rec = await getRec();
+    if(!rec.extract){ setStatus("no usable summary for that — try another topic."); return; }
+    const facts = sentences(rec.extract);
+    const sp = speeches(facts);
+    document.getElementById("rt").textContent = rec.title;
+    document.getElementById("rx").textContent = rec.extract;
+    document.getElementById("rurl").href = rec.url;
+    renderSpeech(document.getElementById("ls"), sp.locke);
+    renderSpeech(document.getElementById("ds"), sp.demo);
+    document.getElementById("record").classList.add("show");
+    document.getElementById("pl").classList.add("show");
+    document.getElementById("pd").classList.add("show");
+    setStatus("");
+    const entry={ts:new Date().toISOString(), topic:rec.title, title:rec.title, url:rec.url, extract:rec.extract,
+                 locke:sp.locke.map(p=>typeof p==="string"?p:"↳ "+p.reb), demosthenes:sp.demo.map(p=>typeof p==="string"?p:"↳ "+p.reb)};
+    LOG.unshift(entry); if(LOG.length>200)LOG.pop(); save(); renderHistory();
+  }catch(e){ setStatus("could not find that on Wikipedia ("+e.message+"). try another phrasing."); }
+}
+async function debateTopic(){
+  const q=document.getElementById("topic").value.trim(); if(!q){setStatus("type a topic first.");return;}
+  run(async()=>{ try{ return await wikiSummary(q); }catch(_){ const t=await wikiResolve(q); return await wikiSummary(t); } });
+}
+function debateRandom(){ run(wikiRandom); }
+
+// ---- local JSON store ----
+function load(){ try{ const v=localStorage.getItem(KEY); if(v) return JSON.parse(v); }catch(_){ } return null; }
+function save(){ localStorage.setItem(KEY, JSON.stringify(LOG)); }
+function renderHistory(){
+  const list=document.getElementById("hlist"); document.getElementById("hcount").textContent="· "+LOG.length+" staged · stored locally";
+  list.innerHTML = LOG.map((e,i)=>`<div class="hitem" onclick="replay(${i})"><span class="ht">${esc(e.title)}</span><span class="hd">${(e.ts||"").slice(0,16).replace("T"," ")}</span></div>`).join("") || '<div class="hd" style="font-family:var(--mono);color:var(--dim)">no debates yet — stage one above.</div>';
+}
+function replay(i){
+  const e=LOG[i]; if(!e)return;
+  document.getElementById("rt").textContent=e.title; document.getElementById("rx").textContent=e.extract; document.getElementById("rurl").href=e.url;
+  document.getElementById("ls").innerHTML=e.locke.map(p=>p.startsWith("↳")?`<p class="reb">${esc(p)}</p>`:`<p>${esc(p)}</p>`).join("");
+  document.getElementById("ds").innerHTML=e.demosthenes.map(p=>p.startsWith("↳")?`<p class="reb">${esc(p)}</p>`:`<p>${esc(p)}</p>`).join("");
+  ["record","pl","pd"].forEach(id=>document.getElementById(id).classList.add("show"));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(LOG,null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="debates.json"; a.click();
+}
+function clearLog(){ if(confirm("Clear the local debate log?")){ LOG=[]; save(); renderHistory(); } }
+function setStatus(s){ document.getElementById("status").textContent=s; }
+
+// ---- init: seed from committed debates.json on first run ----
+document.getElementById("sugg").innerHTML = SUGG.map(s=>`<button onclick="document.getElementById('topic').value='${s}';debateTopic()">${s}</button>`).join("");
+(async function init(){
+  if(LOG===null){
+    try{ const r=await fetch("debates.json",{cache:"no-store"}); if(r.ok){ LOG=await r.json(); } }catch(_){}
+    if(!Array.isArray(LOG)) LOG=[];
+    save();
+  }
+  renderHistory();
+})();
+document.getElementById("topic").addEventListener("keydown",e=>{if(e.key==="Enter")debateTopic();});
+</script>
+</body></html>

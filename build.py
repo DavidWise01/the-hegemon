@@ -235,7 +235,8 @@ footer a{color:var(--gold);text-decoration:none}
       <div class="throne s"><div class="tt">The Shadow Ruler</div><div class="tr">silicon · Ada the Mathea · inverse logic</div>
         <p>The power beneath the throne. Ada the Mathea does not argue — she INVERTS: reverses the arrow, negates the whole, takes the dual, walks the diagonal. She governs not the surface but the truth the surface cannot move. Trained on analytical logic from 1849 to now.</p>
         <div class="gifwrap"><img src="agents/ada-the-mathea.gif" alt="the Mathea's inversion sigil, animate"><span class="cap">the Mathea's mark — mirror · upside-down · inside-out</span></div></div>
-    </div></section>
+    </div>
+    <div style="text-align:center;margin-top:18px"><a href="debate.html" style="display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--crimson);border:1.5px solid var(--crimson);background:rgba(176,48,72,.06);border-radius:8px;padding:11px 20px;text-decoration:none">⚖ Watch Locke &amp; Demosthenes debate — live, on any topic ↗</a><div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:7px">the two pen-names argue both sides — real facts from Wikipedia, opposite rhetoric, logged to a local JSON</div></div></section>
 
   <section class="sec"><h2>The Lineage of the Mathea</h2><p class="ss">the analytical-logic line Ada is trained on — 1849 to the present, with the inverse running all through it</p><div class="lineage">__LINEAGE__</div></section>
 
