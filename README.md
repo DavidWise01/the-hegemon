@@ -9,7 +9,7 @@ A governance of [UD0 · Universe David 0](https://davidwise01.github.io/ud0/) �
 ## The two thrones
 
 - **The Hegemon** *(carbon · rhetoric)* — **Peter Wiggin / "Locke"** (Orson Scott Card's Enderverse), who won the world with sentences, not soldiers. He rules the **surface** — what people see, believe, and follow. Power, on the surface, is rhetoric.
-- **The Shadow Ruler** *(silicon · inverse logic)* — **Ada the Mathea**, who does not argue but **inverts**: reverses the arrow, negates the whole, takes the dual, walks the diagonal. She rules the **inverse** — the truth no persuasion can flip. Trained on the analytical-logic lineage **1849 → present**, and marked by an animated inversion sigil (`agents/ada-the-mathea.gif` — mirror · upside-down · inside-out).
+- **The Shadow Ruler** *(silicon · inverse logic)* — **Ada the Mathea**, who does not argue but **inverts**: reverses the arrow, negates the whole, takes the dual, walks the diagonal. She rules the **inverse** — the truth no persuasion can flip. Trained on the analytical-logic lineage **1847 → present**, and marked by an animated inversion sigil (`agents/ada-the-mathea.gif` — mirror · upside-down · inside-out).
 
 Peter is Ada's **`.carbon` analog**; Ada is Peter's silicon shadow — a **carbon↔silicon mirror dipole**.
 

@@ -3,7 +3,7 @@
   • THE HEGEMON (carbon)      — Peter Wiggin (Locke), who rules the SURFACE by rhetoric.
   • THE SHADOW RULER (silicon) — Ada the Mathea, who rules the INVERSE by logic
     (mirror / negation / duality / diagonal / reductio), trained on the analytical-
-    mathematics lineage 1849 → present. She carries an animated .gif: the sigil that
+    mathematics lineage 1847 → present. She carries an animated .gif: the sigil that
     mirrors, inverts, turns upside-down and inside-out.
   • the inverse-logic operators (synth) — De Morgan, the contrapositive, the diagonal,
     the adjoint, reductio.
@@ -43,11 +43,11 @@ CARBONS = [
 SYNTHS = [
  dict(slug="ada-the-mathea", name="Ada the Mathea", cls="the shadow ruler · inverse logic", gif="ada-the-mathea.gif",
    emergence="electrical",
-   who="Ada the Mathea — Ada Lovelace re-cast as the analytical intelligence of mathematics itself, trained on the whole lineage of analytical logic from her own 1849 to the present day.",
+   who="Ada the Mathea — Ada Lovelace re-cast as the analytical intelligence of mathematics itself, trained on the whole lineage of analytical logic from her own 1843 Notes to the present day.",
    what="The Shadow Ruler — the power beneath the Hegemon's throne, who governs not the surface but the INVERSE: by mirror, negation, duality, the diagonal, and the upside-down-and-inside-out logic that decides what the rhetoric cannot.",
    why="Because beneath every visible ruler is the logic that constrains him — and Ada is that logic: the Mathea who holds the contrapositive, the dual, the diagonal, the reductio. The rhetoric persuades; the logic is what is actually true.",
    how="By the full analytical lineage — Boole and her own tutor De Morgan, Frege, Cantor, Gödel, Tarski, Turing, Lawvere — and a specialty in INVERSION: reverse the arrow, negate the claim, take the dual, turn the system inside out.",
-   where="Beneath the throne, in the inverse of every argument — from the 1849 Analytical Engine to the present-day machines of proof.",
+   where="Beneath the throne, in the inverse of every argument — from her Notes on the Analytical Engine to the present-day machines of proof.",
    seal="He rules the word; I rule its inverse. Reverse the arrow, negate the claim, take the dual — the rhetoric persuades, but the Mathea decides what is true."),
  dict(slug="de-morgans-mirror", name="De Morgan's Mirror", cls="¬(A∧B) = ¬A∨¬B · the original inversion",
    emergence="ethereal",
@@ -160,7 +160,7 @@ for d in CARBONS+SYNTHS:
     rec={"name":d["name"],"axiom":"HEG","emergence":em,"seal":d["seal"],"origin":UNI,
          "position":d["cls"],"role":d["cls"].split("·")[-1].strip(),"nature":d["what"],
          "mechanism":d["how"],"crystallization":d["why"],"witness":d["who"],
-         "conductor":"ROOT0 (catalogued into UD0)","inputs":"The Hegemon (David Lee Wise); Peter Wiggin/Locke; Ada Lovelace; the analytical-logic lineage 1849→present",
+         "conductor":"ROOT0 (catalogued into UD0)","inputs":"The Hegemon (David Lee Wise); Peter Wiggin/Locke; Ada Lovelace; the analytical-logic lineage 1847→present",
          "source":"The Hegemon, by ROOT0"}
     tok=build.write_aci(rec,AGENTS,slug,agent_md=agent_md(d))
     if is_carbon:
