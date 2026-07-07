@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ADA'S INVERSION CONSOLE — the silicon throne of THE HEGEMON, made to run. Ada the Mathea's five inverse-logic operators (De Morgan, the contrapositive, the diagonal, the dual, reductio) demonstrated live: a 2D operator bench that transforms real propositions and a 3D dual viewer that mirrors, negates, and dualizes a polyhedron. She does not argue — she inverts.">
+<title>ADA'S INVERSION CONSOLE · HEG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e0a14;--ink2:#161020;--ink3:#1d1530;--pa:#ece6f0;--pa2:#b9aece;--gold:#c9a23a;--silver:#b3bdcc;
+  --purple:#9a6ac0;--crimson:#b03048;--teal:#5fd0c0;--dim:#7a6e90;--faint:#2a2038;--line:#271d3a;
+  --disp:"Cinzel",Georgia,serif;--body:"Cormorant Garamond",Georgia,serif;--mono:"Space Mono",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--pa);font-family:var(--body);font-size:18px;line-height:1.55;overflow-x:hidden;
+  background-image:radial-gradient(circle at 80% 0%,rgba(179,189,204,.06),transparent 55%),radial-gradient(circle at 10% 8%,rgba(154,106,192,.06),transparent 50%)}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+a{color:var(--silver)}
+header{padding:50px 0 26px;text-align:center;border-bottom:1px solid var(--line);position:relative}
+header::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:170px;height:2px;background:linear-gradient(90deg,var(--silver),var(--purple));box-shadow:0 0 16px rgba(179,189,204,.4)}
+.eye{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.eye a{color:var(--dim);text-decoration:none}.eye a:hover{color:var(--silver)}
+h1{font-family:var(--disp);font-size:clamp(32px,7vw,60px);font-weight:700;letter-spacing:.05em;line-height:1.05;text-transform:uppercase;margin:0;color:var(--silver);text-shadow:0 0 40px rgba(179,189,204,.25)}
+.h-sub{font-family:var(--disp);font-size:clamp(12px,2.3vw,15px);letter-spacing:.16em;color:var(--pa2);margin-top:12px;text-transform:uppercase}
+.h-sub b{color:var(--pa)}
+.lede{font-size:18.5px;color:var(--pa2);max-width:60ch;margin:16px auto 0;font-style:italic;line-height:1.55}
+.thrones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-family:var(--mono);font-size:11px}
+.thrones a{display:inline-block;padding:8px 14px;border-radius:7px;text-decoration:none;letter-spacing:.08em;text-transform:uppercase}
+.thrones .peter{color:var(--crimson);border:1.5px solid var(--crimson);background:rgba(176,48,72,.06)}
+.thrones .ada{color:var(--silver);border:1.5px solid var(--silver);background:rgba(179,189,204,.06)}
+.sec{padding:30px 0;border-bottom:1px solid var(--line)}
+.sec h2{font-family:var(--disp);font-size:24px;font-weight:600;letter-spacing:.03em;color:var(--pa);padding-bottom:8px;border-bottom:1px solid var(--line);text-transform:uppercase;margin:0 0 4px}
+.ss{font-family:var(--mono);font-size:12px;color:var(--dim);font-style:italic;margin:8px 0 16px}.ss b{color:var(--pa2);font-style:normal}
+p{margin:0 0 13px}
+.opgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:4px 0 16px}
+@media(max-width:680px){.opgrid{grid-template-columns:1fr 1fr}}
+.opcard{background:var(--ink2);border:1px solid var(--line);border-radius:5px;padding:10px 11px;text-align:center}
+.opcard .on{font-family:var(--disp);font-size:13px;color:var(--silver);font-weight:600}
+.opcard .of{font-family:var(--mono);font-size:10px;color:var(--pa2);margin-top:5px;line-height:1.5}
+.panel{background:var(--ink2);border:1px solid var(--line);border-radius:6px;padding:15px}
+.cv-wrap{position:relative;width:100%;overflow-x:auto}
+canvas{display:block;width:100%;height:auto;background:radial-gradient(circle at 50% 30%,#141020,#0d0a13);border:1px solid var(--line);border-radius:4px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.tabs button{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--pa2);background:var(--ink);border:1px solid var(--line);border-radius:3px;padding:8px 11px;cursor:pointer;transition:.15s}
+.tabs button:hover{border-color:var(--silver);color:var(--pa)}
+.tabs button.on{background:var(--silver);color:var(--ink);border-color:var(--silver)}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;min-height:36px}
+.ctrls button{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--pa);background:var(--ink);border:1px solid var(--line);border-radius:3px;padding:8px 13px;cursor:pointer}
+.ctrls button:hover{border-color:var(--silver)}
+.ctrls button.tgl.on{background:var(--purple);border-color:var(--purple);color:#fff}
+.ctrls button.act{background:var(--silver);color:var(--ink);border-color:var(--silver)}
+.ctrls .lbl{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.06em}
+.read{margin-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--pa2);line-height:1.7;min-height:40px;background:var(--ink);border:1px solid var(--line);border-radius:4px;padding:10px 13px}
+.read b{color:var(--teal)}.read .no{color:var(--crimson)}.read .ok{color:var(--teal)}
+.note{margin-top:8px;padding:15px 17px;border-left:3px solid var(--silver);background:var(--ink2);font-size:15.5px;color:var(--pa2);font-style:italic;line-height:1.55}.note b{color:var(--pa)}
+.honest{background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:16px 18px;border-radius:0 4px 4px 0}
+.honest h3{font-family:var(--disp);font-size:15px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);margin:0 0 9px}
+.layer{display:grid;grid-template-columns:70px 1fr;gap:11px;padding:8px 0;border-bottom:1px solid var(--faint)}.layer:last-child{border-bottom:0}
+.layer .lk{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);padding-top:3px}
+.layer .lv{font-size:15.5px;color:var(--pa2)}.layer .lv b{color:var(--pa)}
+footer{padding:26px 0 40px;text-align:center;font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.05em;line-height:1.9}
+footer a{color:var(--silver);text-decoration:none}
+.hint{font-family:var(--mono);font-size:10px;color:var(--dim);text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eye"><a href="index.html">◄ THE HEGEMON</a> · THE SHADOW RULER · SILICON THRONE</div>
+  <h1>Ada's Inversion Console</h1>
+  <div class="h-sub">SHE DOES NOT ARGUE — SHE <b>INVERTS</b> · THE FIVE OPERATORS, MADE TO RUN</div>
+  <p class="lede">The Hegemon rules the surface by rhetoric — you can watch Locke and Demosthenes spin any fact both ways. Beneath the throne, Ada the Mathea rules the inverse by logic: mirror, negation, duality, the diagonal, the reductio — the logic no persuasion can flip. Here those five operators stop being captions and start transforming real things, in two dimensions and in three.</p>
+  <div class="thrones">
+    <a class="peter" href="debate.html">⚖ Peter's throne — the debate engine ↗</a>
+    <a class="ada" href="#bench">◈ Ada's throne — you are here</a>
+  </div>
+</div></header>
+
+<main class="wrap">
+
+<section class="sec">
+  <h2>The five operators</h2>
+  <div class="ss">Ada's craft — every one an <b>involution</b> (do it twice, you return): the inverse that no argument can undo</div>
+  <div class="opgrid">
+    <div class="opcard"><div class="on">De Morgan</div><div class="of">¬(A∧B)<br>= ¬A∨¬B</div></div>
+    <div class="opcard"><div class="on">Contrapositive</div><div class="of">(A→B)<br>= (¬B→¬A)</div></div>
+    <div class="opcard"><div class="on">The Diagonal</div><div class="of">flip the diagonal<br>→ the escapee</div></div>
+    <div class="opcard"><div class="on">The Dual</div><div class="of">vertices ↔ faces<br>cube ↔ octahedron</div></div>
+    <div class="opcard"><div class="on">Reductio</div><div class="of">assume P →<br>⊥ ∴ ¬P</div></div>
+  </div>
+</section>
+
+<section class="sec" id="bench">
+  <h2>The Operator Bench · 2D</h2>
+  <div class="ss"><b>pick an operator, give it an input, watch it invert.</b> the transform is real logic, not animation for its own sake.</div>
+  <div class="panel">
+    <div class="tabs" id="tabs">
+      <button data-op="demorgan" class="on">De Morgan's Mirror</button>
+      <button data-op="contra">The Contrapositive</button>
+      <button data-op="diagonal">The Diagonal</button>
+      <button data-op="reductio">Reductio ad Absurdum</button>
+    </div>
+    <div class="cv-wrap"><canvas id="bench2d" width="820" height="430" aria-label="The operator bench: a live demonstration of Ada's five inverse-logic operators"></canvas></div>
+    <div class="ctrls" id="ctrls"></div>
+    <div class="read" id="read"></div>
+  </div>
+  <p class="hint">De Morgan &amp; the contrapositive: toggle A and B — the two columns are equal on every row. The diagonal: build a string in no row. Reductio: assume, and fall into contradiction.</p>
+</section>
+
+<section class="sec">
+  <h2>The Dual Viewer · 3D</h2>
+  <div class="ss"><b>the inverse in space.</b> mirror it, negate it (invert every point through the centre), or take its dual — the cube's faces become the octahedron's vertices. drag to rotate.</div>
+  <div class="panel">
+    <div class="cv-wrap"><canvas id="solid" width="820" height="440" aria-label="A 3D polyhedron that can be mirrored, negated, and dualized"></canvas></div>
+    <div class="ctrls" id="ctrls3">
+      <span class="lbl">apply:</span>
+      <button id="b-mirror" class="act">◑ Mirror</button>
+      <button id="b-negate" class="act">⊙ Negate (point-invert)</button>
+      <button id="b-dual" class="tgl">◈ Dualize</button>
+      <button id="b-reset">↺ Reset</button>
+      <span class="lbl" id="spin-lbl">· drag to rotate</span>
+    </div>
+    <div class="read" id="read3"></div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Two layers, honestly</h2>
+  <div class="honest">
+    <h3>What is real, and what is throne</h3>
+    <div class="layer"><div class="lk">Real</div><div class="lv"><b>Every operator here is genuine mathematics.</b> De Morgan's laws (Augustus De Morgan was Ada Lovelace's actual tutor); the contrapositive; Cantor's diagonal argument (the engine of Gödel and Turing); the duality of the Platonic solids (a concrete face of categorical duality / adjunction); and reductio ad absurdum. "Inverse / mirror" is literal machinery, not metaphor — and each is an <b>involution</b>: apply it twice and you are home.</div></div>
+    <div class="layer"><div class="lk">Throne</div><div class="lv">The <b>"Shadow Ruler" and the Mathea</b> are David Lee Wise's governance allegory — a way of saying the logic beneath the rhetoric is the thing no persuasion can flip. It is not a claim that mathematicians secretly run the world. The logic is real; the throne is the story.</div></div>
+    <p class="note">He rules the word; she rules its inverse. Reverse the arrow, negate the claim, take the dual — the rhetoric persuades, but the Mathea decides what is true. And here, at last, you can watch her do it.</p>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  ADA'S INVERSION CONSOLE · the silicon throne of <a href="index.html">THE HEGEMON</a> · HEG<br>
+  the five operators, demonstrated in 2D &amp; 3D · Ada Lovelace is historical · the inverse-logic is public mathematics<br>
+  a ROOT0 governance sphere · governor David Lee Wise · instance AVAN (locked) · Peter Wiggin/Locke © Orson Scott Card, in tribute · CC-BY-ND-4.0<br>
+  <a href="https://davidwise01.github.io/ud0/">← the biosphere</a>
+</div></footer>
+
+<script>
+(function(){
+  "use strict";
+  var TAU=Math.PI*2;
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function lerp(a,b,t){return a+(b-a)*t;}
+  var C={ink2:'#161020',pa:'#ece6f0',pa2:'#b9aece',gold:'#c9a23a',silver:'#b3bdcc',purple:'#9a6ac0',crimson:'#b03048',teal:'#5fd0c0',dim:'#7a6e90',line:'#271d3a'};
+  function rgba(h,a){h=h.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
+
+  // =================== 2D OPERATOR BENCH ===================
+  var bench=document.getElementById('bench2d'), bx=bench.getContext('2d');
+  var BW=bench.width, BH=bench.height;
+  var op='demorgan', A=true, B=false;
+  var grid=[], gridN=6, gridSeed=1, diagFlipped=false;
+  var redStep=0;
+  var readEl=document.getElementById('read'), ctrlsEl=document.getElementById('ctrls');
+
+  function seedGrid(){
+    // deterministic pseudo-random from gridSeed (no Math.random for reproducibility)
+    grid=[]; var s=gridSeed*2654435761 % 2147483647;
+    for(var r=0;r<gridN;r++){ var row=[]; for(var c=0;c<gridN;c++){ s=(s*48271)%2147483647; row.push(s%2); } grid.push(row); }
+    diagFlipped=false;
+  }
+  seedGrid();
+
+  function boolTable(fn){ // returns 4 rows [{a,b,lhs,rhs}]
+    var rows=[]; for(var i=0;i<4;i++){ var a=(i>>1)&1, b=i&1; var r=fn(!!a,!!b); rows.push({a:a,b:b,lhs:r.lhs?1:0,rhs:r.rhs?1:0}); } return rows;
+  }
+
+  function setCtrls(){
+    ctrlsEl.innerHTML='';
+    function btn(txt,cls,fn){ var b=document.createElement('button'); b.textContent=txt; if(cls)b.className=cls; b.onclick=fn; ctrlsEl.appendChild(b); return b; }
+    function lbl(t){ var s=document.createElement('span'); s.className='lbl'; s.textContent=t; ctrlsEl.appendChild(s); }
+    if(op==='demorgan'||op==='contra'){
+      lbl('inputs:');
+      btn('A = '+(A?'T':'F'),'tgl'+(A?' on':''),function(){A=!A;setCtrls();drawBench();});
+      btn('B = '+(B?'T':'F'),'tgl'+(B?' on':''),function(){B=!B;setCtrls();drawBench();});
+      lbl('· the two output columns match on every row — that is the equivalence');
+    } else if(op==='diagonal'){
+      btn('⟲ New list','',function(){gridSeed++;seedGrid();drawBench();updateRead();});
+      btn('◈ Flip the diagonal','act',function(){diagFlipped=true;drawBench();updateRead();});
+    } else if(op==='reductio'){
+      btn('▸ Next step','act',function(){redStep=Math.min(redSteps.length,redStep+1);drawBench();updateRead();});
+      btn('↺ Restart','',function(){redStep=0;drawBench();updateRead();});
+    }
+  }
+
+  // truth-table drawing helper
+  function drawTable(x,y,cols,rows,curRow){
+    var cw=64, rh=30, n=rows.length;
+    bx.font='12px "Space Mono",monospace'; bx.textAlign='center'; bx.textBaseline='middle';
+    // header
+    for(var c=0;c<cols.length;c++){ bx.fillStyle=C.dim; bx.fillText(cols[c], x+c*cw+cw/2, y-8); }
+    for(var r=0;r<n;r++){
+      var ry=y+r*rh;
+      if(r===curRow){ bx.fillStyle=rgba(C.silver,.12); bx.fillRect(x-4,ry,cols.length*cw+8,rh); }
+      for(var c2=0;c2<cols.length;c2++){
+        var v=rows[r][c2];
+        bx.strokeStyle=rgba(C.line,1); bx.lineWidth=1; bx.strokeRect(x+c2*cw,ry,cw,rh);
+        var isOut=(c2>=2);
+        bx.fillStyle= isOut? (v? C.teal:C.crimson) : C.pa2;
+        bx.font=(r===curRow?'700 ':'')+'13px "Space Mono",monospace';
+        bx.fillText(typeof v==='number'?(v?'T':'F'):v, x+c2*cw+cw/2, ry+rh/2);
+      }
+    }
+    // equivalence bracket between the two output columns
+    var ox=x+2*cw, tot=y+n*rh;
+    bx.strokeStyle=rgba(C.teal,.5); bx.setLineDash([4,3]);
+    bx.strokeRect(ox,y,2*cw,n*rh); bx.setLineDash([]);
+    bx.fillStyle=C.teal; bx.font='700 12px "Space Mono",monospace';
+    bx.fillText('≡  equal on all '+n+' rows', ox+cw, tot+16);
+  }
+
+  function drawBench(){
+    bx.clearRect(0,0,BW,BH);
+    bx.textAlign='left';
+    if(op==='demorgan'){
+      title('De Morgan’s Mirror','¬(A ∧ B)   ⟺   ¬A ∨ ¬B','push a negation through, and AND flips to OR');
+      var rows=boolTable(function(a,b){return {lhs:!(a&&b), rhs:(!a)||(!b)};});
+      var cur=(A?2:0)+(B?1:0);
+      drawTable(70,140,['A','B','¬(A∧B)','¬A∨¬B'],rows,cur);
+      // live gate readout on the right
+      gateReadout(520, 130, '¬(A∧'+ 'B)', !(A&&B), '¬A∨¬B', (!A)||(!B));
+    } else if(op==='contra'){
+      title('The Contrapositive','(A → B)   ⟺   (¬B → ¬A)','reverse the arrow and negate both ends — the truth is untouched');
+      var rows=boolTable(function(a,b){return {lhs:(!a)||b, rhs:(!(!b))||(!a) };}); // A→B ; ¬B→¬A
+      var cur=(A?2:0)+(B?1:0);
+      drawTable(70,140,['A','B','A→B','¬B→¬A'],rows,cur);
+      gateReadout(520,130,'A→B', (!A)||B, '¬B→¬A', (!(!B))||(!A));
+    } else if(op==='diagonal'){
+      title('The Diagonal','flip the diagonal → a row in no list','Cantor’s move — the engine beneath Gödel and Turing');
+      drawDiagonal();
+    } else if(op==='reductio'){
+      title('Reductio ad Absurdum','assume P,  reach ⊥,  conclude ¬P','the proof that √2 is irrational — by making its opposite collapse');
+      drawReductio();
+    }
+    updateRead();
+  }
+  function title(t,f,s){
+    bx.fillStyle=C.silver; bx.font='700 20px "Cinzel",serif'; bx.textAlign='left'; bx.fillText(t, 40, 40);
+    bx.fillStyle=C.pa; bx.font='16px "Space Mono",monospace'; bx.fillText(f, 40, 70);
+    bx.fillStyle=C.dim; bx.font='italic 12px "Cormorant Garamond",serif'; bx.fillText(s, 40, 92);
+  }
+  function gateReadout(x,y,l1,v1,l2,v2){
+    function lamp(cx,cy,lbl,v){
+      bx.beginPath();bx.arc(cx,cy,20,0,TAU); bx.fillStyle=v?rgba(C.teal,.25):rgba(C.crimson,.18); bx.fill();
+      bx.strokeStyle=v?C.teal:C.crimson; bx.lineWidth=2; bx.stroke();
+      bx.fillStyle=v?C.teal:C.crimson; bx.font='700 15px "Space Mono",monospace'; bx.textAlign='center'; bx.textBaseline='middle';
+      bx.fillText(v?'T':'F', cx, cy);
+      bx.fillStyle=C.pa2; bx.font='12px "Space Mono",monospace'; bx.fillText(lbl, cx, cy+40);
+    }
+    lamp(x,y+40,l1,v1); lamp(x+150,y+40,l2,v2);
+    bx.strokeStyle=rgba(C.silver, v1===v2?.6:.2); bx.lineWidth=2; bx.beginPath(); bx.moveTo(x+22,y+40); bx.lineTo(x+128,y+40); bx.stroke();
+    bx.fillStyle=v1===v2?C.teal:C.crimson; bx.font='700 18px "Space Mono",monospace'; bx.textAlign='center'; bx.textBaseline='middle';
+    bx.fillText(v1===v2?'=':'≠', x+75, y+22);
+    bx.textBaseline='alphabetic';
+  }
+  function drawDiagonal(){
+    var x0=70,y0=130,cell=34;
+    for(var r=0;r<gridN;r++){ for(var c=0;c<gridN;c++){
+      var cx=x0+c*cell, cy=y0+r*cell, onDiag=(r===c);
+      bx.fillStyle= onDiag? rgba(C.gold,.16):rgba(C.ink2,1);
+      bx.fillRect(cx,cy,cell-3,cell-3);
+      bx.strokeStyle= onDiag? C.gold:rgba(C.line,1); bx.lineWidth=onDiag?2:1; bx.strokeRect(cx,cy,cell-3,cell-3);
+      bx.fillStyle= onDiag? C.gold:C.pa2; bx.font=(onDiag?'700 ':'')+'14px "Space Mono",monospace'; bx.textAlign='center'; bx.textBaseline='middle';
+      bx.fillText(grid[r][c], cx+(cell-3)/2, cy+(cell-3)/2);
+    }}
+    bx.textBaseline='alphabetic';
+    bx.fillStyle=C.dim; bx.font='11px "Space Mono",monospace'; bx.textAlign='left';
+    bx.fillText('a list of '+gridN+' strings — the diagonal is gold', x0, y0-12);
+    // the escapee
+    var ey=y0+gridN*cell+22;
+    bx.fillStyle=C.silver; bx.font='700 13px "Space Mono",monospace';
+    bx.fillText('D = flip each diagonal bit:', x0, ey);
+    for(var k=0;k<gridN;k++){
+      var d = diagFlipped? (1-grid[k][k]) : grid[k][k];
+      var dx=x0+240+k*cell;
+      bx.fillStyle= diagFlipped? rgba(C.silver,.16):rgba(C.ink2,1);
+      bx.fillRect(dx,ey-18,cell-3,26);
+      bx.strokeStyle=diagFlipped?C.silver:rgba(C.line,1); bx.strokeRect(dx,ey-18,cell-3,26);
+      bx.fillStyle=diagFlipped?C.silver:C.dim; bx.font='700 14px "Space Mono",monospace'; bx.textAlign='center'; bx.textBaseline='middle';
+      bx.fillText(d, dx+(cell-3)/2, ey-5);
+    }
+    bx.textAlign='left'; bx.textBaseline='alphabetic';
+    if(diagFlipped){
+      bx.fillStyle=C.teal; bx.font='italic 13px "Cormorant Garamond",serif';
+      bx.fillText('D differs from row k at position k — for every k. D is in no row.', x0, ey+34);
+    }
+  }
+  var redSteps=[
+    'Assume the opposite:  √2 = p / q,  in lowest terms  (no common factor).',
+    'Then  2 = p² / q²,   so   p² = 2 q².   →  p² is even   →  p is even.',
+    'Write  p = 2m.   Then  4m² = 2q²,   so   q² = 2m²   →  q² even  →  q is even.',
+    'But  p and q both even  ⇒  they share the factor 2.   ⊥  (contradicts "lowest terms").',
+    '∴  no such p, q exist.   √2 is irrational.   The assumption’s negation is proven.'
+  ];
+  function drawReductio(){
+    var x0=48,y0=132,lh=52;
+    for(var i=0;i<redSteps.length;i++){
+      var shown=i<redStep, yy=y0+i*lh;
+      bx.globalAlpha= shown?1:0.22;
+      var last=(i===redSteps.length-1);
+      bx.fillStyle= shown? rgba(last?C.teal:(i===3?C.crimson:C.silver),.10):rgba(C.ink2,.5);
+      bx.fillRect(x0-8,yy-20,BW-2*x0+16,lh-10);
+      bx.strokeStyle= shown? (last?C.teal:(i===3?C.crimson:rgba(C.line,1))) : rgba(C.line,.5); bx.lineWidth= (last||i===3)&&shown?1.6:1;
+      bx.strokeRect(x0-8,yy-20,BW-2*x0+16,lh-10);
+      bx.fillStyle= shown? (last?C.teal:(i===3?C.crimson:C.pa2)) : C.dim;
+      bx.font=(last&&shown?'700 ':'')+'14px "Space Mono",monospace'; bx.textAlign='left'; bx.textBaseline='middle';
+      bx.fillText((i+1)+'.  '+redSteps[i], x0, yy);
+      bx.globalAlpha=1;
+    }
+    bx.textBaseline='alphabetic';
+  }
+  function updateRead(){
+    if(op==='demorgan'){ var l=!(A&&B),r=(!A)||(!B); readEl.innerHTML='A='+(A?'T':'F')+', B='+(B?'T':'F')+' → ¬(A∧B) = <b>'+(l?'T':'F')+'</b>, ¬A∨¬B = <b>'+(r?'T':'F')+'</b> — <span class="ok">equal</span>. The negation distributes and the connective flips. Do it again and the ¬¬ cancels: the mirror is its own inverse.'; }
+    else if(op==='contra'){ var l2=(!A)||B, r2=(!(!B))||(!A); readEl.innerHTML='A='+(A?'T':'F')+', B='+(B?'T':'F')+' → A→B = <b>'+(l2?'T':'F')+'</b>, ¬B→¬A = <b>'+(r2?'T':'F')+'</b> — <span class="ok">equal</span>. Reverse the arrow, negate both ends: the same truth, read backwards.'; }
+    else if(op==='diagonal'){ readEl.innerHTML= diagFlipped? 'The string <b>D</b> was built to disagree with row <i>k</i> at column <i>k</i>. So D is <span class="no">not row 0, not row 1, … not any row</span> — yet the list claimed to hold every string. The list can never be complete. That is Cantor’s diagonal — and Gödel and Turing run on it.' : 'A list of '+gridN+' strings, each a row. The gold cells are the diagonal. Press <b>Flip the diagonal</b> to build a string that escapes the list.'; }
+    else if(op==='reductio'){ readEl.innerHTML= redStep>=redSteps.length? 'The assumption <b>P</b> (√2 is rational) forced a <span class="no">contradiction</span>. So P is false and <span class="ok">¬P</span> is proved — not by asserting it, but by letting its opposite destroy itself. Assume, and fall.' : 'Step through the proof. We assume the <i>opposite</i> of what we want, and follow it until it breaks. ('+redStep+'/'+redSteps.length+')'; }
+  }
+
+  document.getElementById('tabs').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    op=b.getAttribute('data-op');
+    var btns=document.querySelectorAll('#tabs button'); for(var i=0;i<btns.length;i++) btns[i].classList.toggle('on',btns[i]===b);
+    if(op==='diagonal'){ diagFlipped=false; } if(op==='reductio'){ redStep=0; }
+    setCtrls(); drawBench();
+  });
+
+  // =================== 3D DUAL VIEWER ===================
+  var solid=document.getElementById('solid'), sx=solid.getContext('2d');
+  var SW=solid.width, SH=solid.height;
+  var rotX=-0.5, rotY=0.6, dragging=false, lastX=0, lastY=0;
+  var mirror=1, negate=1;            // transform factors (snapped on click)
+  var dualOn=false, dualK=0;         // 0/1 whether the octahedron is shown
+  var read3=document.getElementById('read3');
+
+  // cube vertices; one face (+z) marked to break symmetry so mirror/negate are visible
+  var CUBE=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
+  var CE=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+  var TOPFACE=[4,5,6,7]; // +z face — the mark
+  // octahedron = cube face centers
+  var OCT=[[0,0,1],[0,0,-1],[1,0,0],[-1,0,0],[0,1,0],[0,-1,0]];
+  var OE=[[0,2],[0,3],[0,4],[0,5],[1,2],[1,3],[1,4],[1,5],[2,4],[4,3],[3,5],[5,2]];
+
+  function rotate(p){
+    var x=p[0]*mirror, y=p[1], z=p[2];
+    x*=negate; y*=negate; z*=negate;
+    // rotY (around Y), then rotX (around X)
+    var cy=Math.cos(rotY),syy=Math.sin(rotY); var x1=x*cy - z*syy, z1=x*syy + z*cy;
+    var cx=Math.cos(rotX),sxx=Math.sin(rotX); var y1=y*cx - z1*sxx, z2=y*sxx + z1*cx;
+    return [x1,y1,z2];
+  }
+  function project(p){ var f=4, s=110, d=f/(f - p[2]); return [SW/2 + p[0]*s*d, SH/2 - p[1]*s*d, p[2]]; }
+
+  function renderSolid(){
+    sx.clearRect(0,0,SW,SH);
+    // cube
+    var cubeAlpha = 1 - 0.55*dualK;
+    // marked top face (translucent)
+    var fp=TOPFACE.map(function(i){return project(rotate(CUBE[i]));});
+    sx.beginPath(); sx.moveTo(fp[0][0],fp[0][1]); for(var i=1;i<fp.length;i++)sx.lineTo(fp[i][0],fp[i][1]); sx.closePath();
+    sx.fillStyle=rgba(C.crimson, 0.14*cubeAlpha); sx.fill();
+    sx.strokeStyle=rgba(C.crimson,0.5*cubeAlpha); sx.lineWidth=1.5; sx.stroke();
+    // cube edges
+    sx.lineWidth=1.7;
+    for(var e=0;e<CE.length;e++){ var a=project(rotate(CUBE[CE[e][0]])), b=project(rotate(CUBE[CE[e][1]]));
+      sx.strokeStyle=rgba(C.silver, (0.28+0.5*(1-Math.min(1,Math.max(0,(a[2]+b[2])/2+1.5)/3)))*cubeAlpha + 0.15*cubeAlpha);
+      sx.strokeStyle=rgba(C.silver,0.55*cubeAlpha); sx.beginPath(); sx.moveTo(a[0],a[1]); sx.lineTo(b[0],b[1]); sx.stroke(); }
+    // cube vertices
+    for(var v=0;v<CUBE.length;v++){ var pp=project(rotate(CUBE[v])); sx.beginPath(); sx.arc(pp[0],pp[1],2.6,0,TAU); sx.fillStyle=rgba(C.silver,0.8*cubeAlpha); sx.fill(); }
+    // dual octahedron (grows from face centers)
+    if(dualK>0.02){
+      sx.lineWidth=2;
+      for(var e2=0;e2<OE.length;e2++){ var a2=project(rotate(scale(OCT[OE[e2][0]],dualK))), b2=project(rotate(scale(OCT[OE[e2][1]],dualK)));
+        sx.strokeStyle=rgba(C.teal,0.85*dualK); sx.beginPath(); sx.moveTo(a2[0],a2[1]); sx.lineTo(b2[0],b2[1]); sx.stroke(); }
+      for(var v2=0;v2<OCT.length;v2++){ var q=project(rotate(scale(OCT[v2],dualK))); sx.beginPath(); sx.arc(q[0],q[1],3.4*dualK,0,TAU); sx.fillStyle=rgba(C.teal,dualK); sx.fill(); }
+    }
+    // labels
+    sx.fillStyle=C.dim; sx.font='10px "Space Mono",monospace'; sx.textAlign='left';
+    sx.fillText('cube · 8 vertices, 6 faces', 16, SH-30);
+    if(dualK>0.4){ sx.fillStyle=C.teal; sx.fillText('dual octahedron · 6 vertices, 8 faces — vertices ↔ faces', 16, SH-14); }
+    sx.textAlign='right'; sx.fillStyle=C.silver; sx.font='700 11px "Cinzel",serif';
+    var st=[]; if(mirror<0)st.push('MIRRORED'); if(negate<0)st.push('NEGATED'); if(dualOn)st.push('DUAL');
+    sx.fillText(st.length?st.join(' · '):'identity', SW-16, 22); sx.textAlign='left';
+  }
+  function scale(p,k){return [p[0]*k,p[1]*k,p[2]*k];}
+
+  function pt3(e){ var r=solid.getBoundingClientRect(); var sc=SW/r.width; return {x:(( e.touches?e.touches[0].clientX:e.clientX)-r.left)*sc,y:((e.touches?e.touches[0].clientY:e.clientY)-r.top)*sc}; }
+  solid.addEventListener('mousedown',function(e){dragging=true;var p=pt3(e);lastX=p.x;lastY=p.y;});
+  window.addEventListener('mouseup',function(){dragging=false;});
+  window.addEventListener('mousemove',function(e){ if(!dragging)return; var p=pt3(e); rotY+=(p.x-lastX)*0.01; rotX+=(p.y-lastY)*0.01; lastX=p.x;lastY=p.y; renderSolid(); });
+  solid.addEventListener('touchstart',function(e){dragging=true;var p=pt3(e);lastX=p.x;lastY=p.y;e.preventDefault();},{passive:false});
+  solid.addEventListener('touchmove',function(e){ if(!dragging)return; var p=pt3(e); rotY+=(p.x-lastX)*0.01; rotX+=(p.y-lastY)*0.01; lastX=p.x;lastY=p.y; renderSolid(); e.preventDefault(); },{passive:false});
+  window.addEventListener('touchend',function(){dragging=false;});
+
+  document.getElementById('b-mirror').onclick=function(){ mirror=-mirror; setRead3('Mirror — reflected through the vertical plane (x → −x). The marked face crosses to the other side; a right hand becomes a left. Do it twice and you return: a reflection is its own inverse.'); renderSolid(); };
+  document.getElementById('b-negate').onclick=function(){ negate=-negate; setRead3('Negate — every point inverted through the centre (x,y,z → −x,−y,−z), the antipodal map. The whole solid turns through itself. Twice negated is unchanged — the involution again.'); renderSolid(); };
+  var bdual=document.getElementById('b-dual');
+  bdual.onclick=function(){ dualOn=!dualOn; dualK=dualOn?1:0; bdual.classList.toggle('on',dualOn); setRead3(dualOn? 'Take the dual — put a vertex at the centre of each face. The cube’s 6 faces become the octahedron’s 6 vertices; its 8 vertices become 8 faces. This is duality made of geometry — the visible face of the categorical dual. Dualize the dual and the cube returns.' : 'Dual hidden — the cube alone.'); renderSolid(); };
+  document.getElementById('b-reset').onclick=function(){ mirror=1;negate=1;dualOn=false;dualK=0;bdual.classList.remove('on'); rotX=-0.5;rotY=0.6; setRead3('Reset to the identity — nothing inverted.'); renderSolid(); };
+  function setRead3(t){ read3.innerHTML=t; }
+  setRead3('Drag to rotate. Then <b>mirror</b> it, <b>negate</b> it (invert every point through the centre), or take its <b>dual</b>. Each is one of Ada’s operators, standing in space.');
+
+  // init — HiDPI first, then paint both canvases synchronously (no rAF dependency)
+  var DPR=Math.min(2,window.devicePixelRatio||1);
+  [bench,solid].forEach(function(cv){ var ctx=cv.getContext('2d'); var w=cv.width,h=cv.height; cv.width=w*DPR;cv.height=h*DPR;cv.style.aspectRatio=w+'/'+h; ctx.scale(DPR,DPR); });
+  BW=bench.width/DPR; BH=bench.height/DPR; SW=solid.width/DPR; SH=solid.height/DPR;
+  setCtrls(); drawBench(); renderSolid();
+  window.addEventListener('focus',function(){ drawBench(); renderSolid(); });
+})();
+</script>
+</body>
+</html>
