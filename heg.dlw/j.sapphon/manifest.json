@@ -1,0 +1,12 @@
+{
+  "name": "j.sapphon",
+  "role": "Hegemon GEN-1 evidence airlock",
+  "status": "FROZEN-CORE / APPEND-ONLY",
+  "hot_register": ["past_verified", "current_verified"],
+  "cold_register": ["history", "quarantine", "non_aligned"],
+  "reproductive": ["verified"],
+  "non_reproductive": ["quarantine", "non_aligned"],
+  "reverify": "exception-driven",
+  "parent": "DavidWise01/the-hegemon",
+  "kernel": "DavidWise01/toph-kernel"
+}
