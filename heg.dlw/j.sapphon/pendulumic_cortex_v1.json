@@ -1,0 +1,58 @@
+{
+  "sapphon": "j.sapphon",
+  "role": "GEN-1 evidence airlock",
+  "version": "CORTEX-PENDULUMIC-v1",
+  "status": "APPEND-ONLY EXTENSION",
+  "source_kernel": "DavidWise01/toph-kernel/frozen/STOICHEION_PENDULUMIC_SPINOR_V4.md",
+  "spinors": {
+    "s1": [
+      -2,
+      3
+    ],
+    "s2": [
+      3,
+      -2
+    ],
+    "norm2": 13,
+    "residual": [
+      1,
+      1
+    ]
+  },
+  "pendulum": {
+    "max": 13,
+    "step": 0.01,
+    "one_way_intervals": 1300,
+    "round_trip_intervals": 2600,
+    "round_trip_states": 2601
+  },
+  "closure_gate": "-1 + 0 + 1 = 0 -> candidate may realize as 1",
+  "decision_states": {
+    "yes": 1,
+    "no": "0 -> 2^3 -> 0",
+    "maybe": "WAIT(1)"
+  },
+  "chemistry": {
+    "primitive": "..|::|::..|",
+    "lanes": [
+      "nucleach",
+      "photonic",
+      "electronic"
+    ],
+    "weights": [
+      4,
+      2,
+      4
+    ],
+    "enclosure": "-4::2::4+",
+    "release_cycle": "0 -> 2 -> 0"
+  },
+  "scientific_boundary": "Model-local symbolic control layer; not a claim that these rules are established physical chemistry.",
+  "ingest_extension": {
+    "before_merit": "evaluate closure gate",
+    "balanced": "eligible for existing merit gate",
+    "unbalanced": "quarantine / wait",
+    "append_only": true,
+    "core_mutated": false
+  }
+}
