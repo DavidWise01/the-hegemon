@@ -1,0 +1,29 @@
+{
+  "agent": "the-contrapositive",
+  "version": "CORTEX-TOROID5-v2",
+  "status": "APPEND-ONLY EXTENSION",
+  "source_kernel": "DavidWise01/toph-kernel/frozen/TOROID5_COMMIT_CLOCK_V1.md",
+  "primitive": ".||||.",
+  "phases": [
+    "0",
+    "1/5",
+    "2/5",
+    "3/5",
+    "4/5",
+    "1"
+  ],
+  "transfer_quantum": "1/5",
+  "transfers_per_commit": 5,
+  "unique_toroidal_phases": 5,
+  "displayed_positions": 6,
+  "closure_witness": "1 ≡ next-cycle 0",
+  "closure_gate": "-1 + 0 + 1 = 0 -> candidate may realize as 1",
+  "decision_states": {
+    "yes": 1,
+    "no": "0 -> 2^3 -> 0",
+    "maybe": "WAIT(1)"
+  },
+  "timing_role": "deterministic commit clock; schedules when a candidate may commit, never decides validity by itself",
+  "exact_arithmetic": "rational fifths; zero accumulated phase error",
+  "scientific_boundary": "Finite-state/control abstraction; no claim that TOROID-5 itself is an established physical chemistry mechanism."
+}
